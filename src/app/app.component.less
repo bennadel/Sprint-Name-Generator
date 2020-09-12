@@ -116,3 +116,37 @@ h1 {
 		background-color: darken( #ff3366, 10% ) ;
 	}
 }
+
+.languages {
+	display: flex ;
+	font-size: 14px ;
+	line-height: 17px ;
+	position: fixed ;
+	right: 10px ;
+	top: 10px ;
+
+	&__label {
+		font-weight: 600 ;
+		margin-right: 10px ;
+	}
+
+	&__options {
+		display: flex ;
+		list-style-type: none ;
+		margin: 0px 0px 0px 0px ;
+		padding: 0px 0px 0px 0px ;
+	}
+
+	&__option {
+		margin: 0px 0px 0px 10px ;
+		padding: 0px 0px 0px 0px ;
+
+		&:first-child {
+			margin-left: 0px ;
+		}
+	}
+
+	&__link {
+		color: #ff3366 ;
+	}
+}

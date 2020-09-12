@@ -3,11 +3,15 @@
 import { Component } from "@angular/core";
 
 // Import the application components and services.
-import { descriptions } from "./dictionaries/descriptions";
-import { things } from "./dictionaries/things";
+import { languages } from "./dictionaries";
 
 // ----------------------------------------------------------------------------------- //
 // ----------------------------------------------------------------------------------- //
+
+interface Language {
+	descriptions: string[],
+	things: string[]
+}
 
 @Component({
 	selector: "app-root",
@@ -25,11 +29,13 @@ export class AppComponent {
 	// I initialize the app component.
 	constructor() {
 
+		var language = this.selectLanguage();
+
 		this.descriptionIndex = 0;
-		this.descriptions = descriptions;
+		this.descriptions = language.descriptions;
 		this.sprintName = "";
 		this.thingIndex = 0;
-		this.things = things;
+		this.things = language.things;
 
 		this.generateName();
 
@@ -125,6 +131,29 @@ export class AppComponent {
 		}
 
 		return( nextIndex );
+
+	}
+
+
+	// I select the language package based on the current URL.
+	private selectLanguage() : Language {
+
+		var searchString = window.location.search.slice( 1 );
+		var languagePair = searchString.match( /(^|&)lang=(en|es)\b/i );
+
+		var languageCode = languagePair
+			? languagePair[ 2 ]
+			: "en"
+		;
+
+		switch ( languageCode ) {
+			case "es":
+				return( languages.es );
+			break;
+			default:
+				return( languages.en );
+			break;
+		}
 
 	}
 
