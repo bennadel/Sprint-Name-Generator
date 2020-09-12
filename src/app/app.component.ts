@@ -3,15 +3,11 @@
 import { Component } from "@angular/core";
 
 // Import the application components and services.
+import { Language } from "./dictionaries";
 import { languages } from "./dictionaries";
 
 // ----------------------------------------------------------------------------------- //
 // ----------------------------------------------------------------------------------- //
-
-interface Language {
-	descriptions: string[],
-	things: string[]
-}
 
 @Component({
 	selector: "app-root",
@@ -20,22 +16,32 @@ interface Language {
 })
 export class AppComponent {
 
-	public descriptionIndex: number;
-	public descriptions: string[];
+	public partOneIndex: number;
+	public partOneItems: string[];
+	public partTwoIndex: number;
+	public partTwoItems: string[];
 	public sprintName: string;
-	public thingIndex: number;
-	public things: string[];
 
 	// I initialize the app component.
 	constructor() {
 
 		var language = this.selectLanguage();
 
-		this.descriptionIndex = 0;
-		this.descriptions = language.descriptions;
 		this.sprintName = "";
-		this.thingIndex = 0;
-		this.things = language.things;
+		this.partOneIndex = 0;
+		this.partTwoIndex = 0;
+
+		if ( language.order === "description-first" ) {
+
+			this.partOneItems = language.descriptions;
+			this.partTwoItems = language.things;
+
+		} else {
+
+			this.partOneItems = language.things;
+			this.partTwoItems = language.descriptions;
+
+		}
 
 		this.generateName();
 
@@ -50,13 +56,13 @@ export class AppComponent {
 	public generateName() : void {
 
 		// Randomly select next parts of the name.
-		this.descriptionIndex = this.nextIndex( this.descriptionIndex, this.descriptions );
-		this.thingIndex = this.nextIndex( this.thingIndex, this.things );
+		this.partOneIndex = this.nextIndex( this.partOneIndex, this.partOneItems );
+		this.partTwoIndex = this.nextIndex( this.partTwoIndex, this.partTwoItems );
 
 		this.sprintName = (
-			this.descriptions[ this.descriptionIndex ] +
+			this.partOneItems[ this.partOneIndex ] +
 			" " +
-			this.things[ this.thingIndex ]
+			this.partTwoItems[ this.partTwoIndex ]
 		);
 
 		this.shareSprintNameWithUser( this.sprintName );

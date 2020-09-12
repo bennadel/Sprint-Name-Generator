@@ -8,12 +8,12 @@
 
 		<ul
 			class="items"
-			[style.transform]="( 'translateY( -' + ( descriptionIndex * 85 ) + 'px )' )">
+			[style.transform]="( 'translateY( -' + ( partOneIndex * 85 ) + 'px )' )">
 			<li
-				*ngFor="let description of descriptions ; let i = index ;"
+				*ngFor="let value of partOneItems ; let i = index ;"
 				class="item"
-				[class.selected]="( i === descriptionIndex )">
-				{{ description }}
+				[class.selected]="( i === partOneIndex )">
+				{{ value }}
 			</li>
 		</ul>
 
@@ -22,12 +22,12 @@
 
 		<ul
 			class="items"
-			[style.transform]="( 'translateY( -' + ( thingIndex * 85 ) + 'px )' )">
+			[style.transform]="( 'translateY( -' + ( partTwoIndex * 85 ) + 'px )' )">
 			<li
-				*ngFor="let thing of things ; let i = index ;"
+				*ngFor="let value of partTwoItems ; let i = index ;"
 				class="item"
-				[class.selected]="( i === thingIndex )">
-				{{ thing }}
+				[class.selected]="( i === partTwoIndex )">
+				{{ value }}
 			</li>
 		</ul>
 
