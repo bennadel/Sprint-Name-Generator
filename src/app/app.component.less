@@ -93,6 +93,65 @@ h1 {
 	justify-content: center ;
 }
 
+.what-is-this {
+	text-align: center;
+	a {
+		text-align: center;
+		cursor: pointer;
+	}
+
+	.adjective-definition {
+		text-align: left;
+		position: relative;
+		background: #e6e6e6;
+		border-radius: .4em;
+		margin: 75px auto 0 auto;
+		width: 500px;
+		padding: 30px;
+
+		.word {
+			font-size: 1.2em;
+			font-weight: 400;
+			margin-bottom: 10px;
+
+			span {
+				font-style: italic;
+				color: #bbb;
+			}
+		}
+
+		.definition {
+			font-weight: 200;
+			font-style: italic;
+			color: #888;
+
+			&.first{
+				margin-bottom: 30px;
+			}
+
+			a{
+				display: inline-block;
+				margin-top: 10px;
+				font-size: 0.9em;
+			}
+		}
+
+		&:after {
+			content: '';
+			position: absolute;
+			top: 0;
+			left: 50%;
+			width: 0;
+			height: 0;
+			border: 20px solid transparent;
+			border-bottom-color: #e6e6e6;
+			border-top: 0;
+			margin-left: -20px;
+			margin-top: -20px;
+		}
+	}
+}
+
 .length {
 	color: #999999 ;
 	font-size: 16px ;
