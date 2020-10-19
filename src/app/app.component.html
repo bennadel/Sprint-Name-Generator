@@ -34,6 +34,32 @@
 	</div>
 </div>
 
+
+<!-- Only show this for english. -->
+<div class="what-is-this" [hidden]="selectedLanguage != 'English'">
+	<a (click)="getDetails()" [hidden]="adjectiveDefinition.length > 0">
+		What is this?
+	</a>
+
+	<div class="adjective-definition" [hidden]="adjectiveDefinition.length == 0 || thingDefinition.length == 0">
+		<div class="word">
+			{{partOneItems[partOneIndex]}}
+			<span>&lt;adjective&gt;</span>
+		</div>
+		<div class="definition first">
+			{{adjectiveDefinition}}
+		</div>
+		<div class="word">
+			{{partTwoItems[partTwoIndex]}}
+			<span>&lt;noun&gt;</span>
+		</div>
+		<div class="definition">
+			{{thingDefinition}} <br/>
+			<a href="https://en.wikipedia.org/wiki/{{partTwoItems[partTwoIndex]}}" target="_blank">View on Wikipedia</a>
+		</div>
+	</div>
+</div>
+
 <div class="length">
 	Sprint name is {{ sprintName.length }} characters
 </div>

@@ -6,6 +6,8 @@ import { Component } from "@angular/core";
 import { Language } from "./dictionaries";
 import { languages } from "./dictionaries";
 
+import {DictionaryApiService} from "./dictionary-api.service";
+
 // ----------------------------------------------------------------------------------- //
 // ----------------------------------------------------------------------------------- //
 
@@ -21,15 +23,21 @@ export class AppComponent {
 	public partTwoIndex: number;
 	public partTwoItems: string[];
 	public sprintName: string;
+	public selectedLanguage: string;
+	public adjectiveDefinition: string;
+	public thingDefinition: string;
 
 	// I initialize the app component.
-	constructor() {
+	constructor(private dictionaryApiService: DictionaryApiService) {
 
 		var language = this.selectLanguage();
 
 		this.sprintName = "";
 		this.partOneIndex = 0;
 		this.partTwoIndex = 0;
+		this.selectedLanguage = language.name;
+		this.adjectiveDefinition = "";
+		this.thingDefinition = "";
 
 		if ( language.order === "description-first" ) {
 
@@ -55,6 +63,10 @@ export class AppComponent {
 	// and then joining the two values.
 	public generateName() : void {
 
+		// Clear while we're generating a new name.
+		this.adjectiveDefinition = "";
+		this.thingDefinition = "";
+
 		// Randomly select next parts of the name.
 		this.partOneIndex = this.nextIndex( this.partOneIndex, this.partOneItems );
 		this.partTwoIndex = this.nextIndex( this.partTwoIndex, this.partTwoItems );
@@ -66,6 +78,15 @@ export class AppComponent {
 		);
 
 		this.shareSprintNameWithUser( this.sprintName );
+
+	}
+
+	// I fetch a definition for the adjective and load an image of the animal.
+	public async getDetails() : Promise<void> {
+
+		this.adjectiveDefinition = await this.dictionaryApiService.getWordDefinition("en", this.partOneItems[ this.partOneIndex ]);
+
+		this.thingDefinition = await this.dictionaryApiService.getWordDefinition("en", this.partTwoItems[ this.partTwoIndex ]);
 
 	}
 
